@@ -64,7 +64,9 @@ function plugin_admin_init(){
 
 function backstretch_setting_string() {
 	$options = get_option('backstretch_options');
+	#var_dump($options);
 	echo "<input id='plugin_text_string' name='backstretch_options[backstretch_url]' style='width:100%;' type='text'' value='{$options['backstretch_url']}' />";
+	#var_dump($_POST);
 }
 
 function backstretch_section_text() {
@@ -90,8 +92,8 @@ function register_backstretch() {
  
 add_action('wp_enqueue_scripts', 'register_backstretch');
 
-add_action('wp_footer', 'backstretch_js');
-function backstretch_js() {
+add_action('wp_head', 'backstretch_head');
+function backstretch_head() {
 	$options = get_option('backstretch_options');
 	$url = $options['backstretch_url'];
 	if($url=="") {
@@ -102,3 +104,19 @@ function backstretch_js() {
 });</script>';
 	echo $var;
 }
+
+// [bartag foo="foo-value"]
+function backstretch_shortcode( $atts ) {
+	extract( shortcode_atts( array(
+		'url' => '',
+	), $atts ) );
+	
+	if($url=='') {
+		return false;
+	}
+	$var = '<script type="text/javascript">$(document).ready(function(){
+    $.backstretch("' . $url . '");
+});</script>';
+	return $var;
+}
+add_shortcode( 'backstretch', 'backstretch_shortcode' );
