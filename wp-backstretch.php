@@ -64,9 +64,7 @@ function plugin_admin_init(){
 
 function backstretch_setting_string() {
 	$options = get_option('backstretch_options');
-	#var_dump($options);
 	echo "<input id='plugin_text_string' name='backstretch_options[backstretch_url]' style='width:100%;' type='text'' value='{$options['backstretch_url']}' />";
-	#var_dump($_POST);
 }
 
 function backstretch_section_text() {
@@ -74,11 +72,7 @@ function backstretch_section_text() {
 }
 
 function backstretch_options_validate($input) {
-	$newinput['text_string'] = trim($input['text_string']);
-	if(!preg_match('/^[a-z0-9]{32}$/i', $newinput['text_string'])) {
-		$newinput['text_string'] = '';
-	}
-	#return $newinput;
+	// no validation... yet
 	return $input;
 }
 
@@ -90,7 +84,7 @@ function register_backstretch() {
     wp_register_script( 'backstretch', plugin_dir_url( __FILE__ ) . 'jquery.backstretch.min.js');
     wp_enqueue_script( 'backstretch' );
 	wp_deregister_script( 'jquery' ); // get the latest jquery
-	wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js');
+	wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
 	wp_enqueue_script( 'jquery' );
 }    
  
@@ -106,7 +100,5 @@ function backstretch_js() {
 	$var = '<script type="text/javascript">jQuery(function(){
     $.backstretch("' . $url . '");
 });</script>';
-	#var_dump($var);
 	echo $var;
-	#var_dump($var);
 }
