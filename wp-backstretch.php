@@ -85,6 +85,9 @@ function backstretch_options_validate($input) {
 function register_backstretch() {
     wp_register_script( 'backstretch', plugin_dir_url( __FILE__ ) . 'jquery.backstretch.min.js');
     wp_enqueue_script( 'backstretch' );
+    # you can comment out the three rows below if you are running Wordpress 3.3
+    # and don't want to use jQuery from Googles CDN
+    # http://code.google.com/apis/libraries/
 	wp_deregister_script( 'jquery' ); // get the latest jquery
 	wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
 	wp_enqueue_script( 'jquery' );
