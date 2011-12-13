@@ -92,7 +92,7 @@ function register_backstretch() {
  
 add_action('wp_enqueue_scripts', 'register_backstretch');
 
-add_action('wp_head', 'backstretch_head');
+add_action('wp_footer', 'backstretch_head');
 function backstretch_head() {
 	$options = get_option('backstretch_options');
 	$url = $options['backstretch_url'];
