@@ -30,7 +30,7 @@ $options = get_option('backstretch_options');
 $url = $options['backstretch_url'];
 ?>
 <?php if(!$the_file) { ?>
-	<div class="update-nag"><?php _e('Please download <strong>jquery.backstretch.min.js</strong> from <a href="https://github.com/srobbin/jquery-backstretch/zipball/master">https://github.com/srobbin/jquery-backstretch/zipball/master</a> and put it in the same folder as <strong>wp-backstretch.php</strong>.','wp-backstretch'); ?></div>
+	<div class="update-nag"><?php _e('Please download <strong>jquery.backstretch.min.js</strong> from <a href="https://github.com/srobbin/jquery-backstretch/archive/master.zip">https://github.com/srobbin/jquery-backstretch/archive/master.zip</a> and put it in the same folder as <strong>wp-backstretch.php</strong>.','wp-backstretch'); ?></div>
 <?php }; ?>
 <div class="wrap">
 <div id="icon-options-general" class="icon32"><br /></div><h2><?php _e('jQuery Backstretch','wp-backstretch'); ?></h2>
