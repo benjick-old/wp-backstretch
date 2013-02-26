@@ -16,22 +16,18 @@ and drop it in the wp-backstretch folder
 */
 
 /*******************************
- GUI
+ GUI 
  *******************************/
 
 add_action('admin_menu', 'wp_backstretch_menu');
 function wp_backstretch_menu() {
-	add_submenu_page( 'options-general.php', 'jQuery Backstrech', 'Backstrech', 'manage_options', 'wp-backstretch', 'wp_backstretch' ); 
+	add_submenu_page( 'themes.php', 'jQuery Backstrech', 'Backstrech', 'manage_options', 'wp-backstretch', 'wp_backstretch' ); 
 }
 
 function wp_backstretch() {
-$the_file = file_exists(dirname( __FILE__ ) . '/jquery.backstretch.min.js');
 $options = get_option('backstretch_options');
 $url = $options['backstretch_url'];
 ?>
-<?php if(!$the_file) { ?>
-	<div class="update-nag"><?php _e('Please download <strong>jquery.backstretch.min.js</strong> from <a href="https://github.com/srobbin/jquery-backstretch/archive/master.zip">https://github.com/srobbin/jquery-backstretch/archive/master.zip</a> and put it in the same folder as <strong>wp-backstretch.php</strong>.','wp-backstretch'); ?></div>
-<?php }; ?>
 <div class="wrap">
 <div id="icon-options-general" class="icon32"><br /></div><h2><?php _e('jQuery Backstretch','wp-backstretch'); ?></h2>
 
@@ -83,32 +79,14 @@ function backstretch_options_validate($input) {
  *******************************/
 
 function register_backstretch() {
-    wp_register_script( 'backstretch', plugin_dir_url( __FILE__ ) . 'jquery.backstretch.min.js');
-    wp_enqueue_script( 'backstretch' );
-    # you can comment out the three rows below if you are running Wordpress 3.3
-    # and don't want to use jQuery from Googles CDN
-    # http://code.google.com/apis/libraries/
-	wp_deregister_script( 'jquery' ); // get the latest jquery
-	wp_register_script( 'jquery', 'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js');
-	wp_enqueue_script( 'jquery' );
+    #wp_register_script( 'backstretch', plugin_dir_url( __FILE__ ) . 'jquery.backstretch.min.js');
+    #wp_enqueue_script( 'backstretch' ); // old method with drop in place - keeping it if someone wants to use it
+    wp_enqueue_script( 'backstretch', 'http://cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.3/jquery.backstretch.min.js');
 }    
  
 add_action('wp_enqueue_scripts', 'register_backstretch');
 
-add_action('wp_footer', 'backstretch_head');
-function backstretch_head() {
-	$options = get_option('backstretch_options');
-	$url = $options['backstretch_url'];
-	if($url=="") {
-		return false;
-	}
-	$var = '<script type="text/javascript">jQuery(function(){
-    $.backstretch("' . $url . '");
-});</script>';
-	echo $var;
-}
-
-// [bartag foo="foo-value"]
+// Shortcode 
 function backstretch_shortcode( $atts ) {
 	extract( shortcode_atts( array(
 		'url' => '',
@@ -117,9 +95,22 @@ function backstretch_shortcode( $atts ) {
 	if($url=='') {
 		return false;
 	}
-	$var = '<script type="text/javascript">$(document).ready(function(){
+	$var = '<script type="text/javascript">jQuery(document).ready(function($){
     $.backstretch("' . $url . '");
 });</script>';
 	return $var;
 }
 add_shortcode( 'backstretch', 'backstretch_shortcode' );
+
+function backstretch_head() {
+	$options = get_option('backstretch_options');
+	$url = $options['backstretch_url'];
+	if($url=="") {
+		return false;
+	}
+	$var = '<script type="text/javascript">jQuery(document).ready(function($){
+    $.backstretch("' . $url . '");
+});</script>';
+	echo $var;
+}
+add_action('wp_head', 'backstretch_head');
