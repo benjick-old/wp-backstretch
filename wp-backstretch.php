@@ -3,7 +3,7 @@
 Plugin Name: wp-backstretch
 Plugin URI: https://github.com/benjick/wp-backstretch
 Description: Adds the jQuery backstretch plugin to WP
-Version: 0.1
+Version: 1.0
 Author: benjick
 Author URI: http://maxmalm.se
 License: GPL2
