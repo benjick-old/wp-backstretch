@@ -21,7 +21,7 @@ and drop it in the wp-backstretch folder
 
 add_action('admin_menu', 'wp_backstretch_menu');
 function wp_backstretch_menu() {
-	add_submenu_page( 'themes.php', 'jQuery Backstrech', 'Backstrech', 'manage_options', 'wp-backstretch', 'wp_backstretch' ); 
+	add_submenu_page( 'themes.php', 'jQuery Backstrech', 'Backstrech', 'switch_themes', 'wp-backstretch', 'wp_backstretch' ); 
 }
 
 function wp_backstretch() {
