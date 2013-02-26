@@ -11,8 +11,8 @@ License: GPL2
 jQuery Backstretch is made by Scott Robbin
 http://srobbin.com/blog/jquery-plugins/jquery-backstretch/
 
-Download the jQuery plugin from https://github.com/srobbin/jquery-backstretch/zipball/master
-and drop it in the wp-backstretch folder
+This plugin adds the javascript for Backstretch and provides a 
+simple interface to choose image
 */
 
 /*******************************
