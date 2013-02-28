@@ -5,8 +5,8 @@ Tags: backstretch, jquery, background, image
 Requires at least: 3.3
 Tested up to: 3.5.1
 Stable tag: 1.0
-License: GPLv2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: BSD 3Clause
+License URI: http://www.xfree86.org/3.3.6/COPYRIGHT2.html#4
 
 Loads the jQuery Backstretch plugin and provides an easy GUI for it.
 
