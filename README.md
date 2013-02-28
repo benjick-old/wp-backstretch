@@ -1,6 +1,6 @@
 wp-backstretch
 ==============
-== Wordpress plugin ==
+###Wordpress plugin
 
 This plugin adds two things to your Wordpress installation.
 
