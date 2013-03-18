@@ -2,7 +2,7 @@
 /*
 Plugin Name: wp-backstretch
 Plugin URI: https://github.com/benjick/wp-backstretch
-Description: Adds the jQuery backstretch plugin to WP
+Description: Adds the jQuery backstretch plugin to WP with a GUI
 Version: 1.0
 Author: benjick
 Author URI: http://maxmalm.se
@@ -10,18 +10,17 @@ License: GPL2
 
 jQuery Backstretch is made by Scott Robbin
 http://srobbin.com/blog/jquery-plugins/jquery-backstretch/
-
-This plugin adds the javascript for Backstretch and provides a 
-simple interface to choose image
 */
 
 /*******************************
  GUI 
  *******************************/
 
+add_action( 'admin_enqueue_scripts', 'wp_enqueue_media' );
+
 add_action('admin_menu', 'wp_backstretch_menu');
 function wp_backstretch_menu() {
-	add_submenu_page( 'themes.php', 'jQuery Backstrech', 'Backstrech', 'switch_themes', 'wp-backstretch', 'wp_backstretch' ); 
+	add_submenu_page( 'themes.php', 'jQuery Backstretch', 'Backstretch', 'switch_themes', 'wp-backstretch', 'wp_backstretch' ); 
 }
 
 function wp_backstretch() {
@@ -37,6 +36,10 @@ $url = $options['backstretch_url'];
 
 <input name="Submit" type="submit" value="<?php esc_attr_e('Save Changes'); ?>" />
 </form>
+<!-- Use the fancy uploader -->
+<script type="text/javascript">
+jQuery(document).ready(function(e){var t=true,n=wp.media.editor.send.attachment;e("#backstretch_media").click(function(r){var i=wp.media.editor.send.attachment;var s=e(this);var o="backstretch_url";t=true;wp.media.editor.send.attachment=function(r,i){if(t){e("#"+o).val(i.url)}else{return n.apply(this,[r,i])}};wp.media.editor.open(s);return false});e(".add_media").on("click",function(){t=false})})
+</script>
 
 <?php if($url!="") { ?>
 	<h3><?php _e('Current image','wp-backstretch'); ?></h3>
@@ -60,9 +63,10 @@ function plugin_admin_init(){
 
 function backstretch_setting_string() {
 	$options = get_option('backstretch_options');
-	#var_dump($options);
-	echo "<input id='plugin_text_string' name='backstretch_options[backstretch_url]' style='width:100%;' type='text'' value='{$options['backstretch_url']}' />";
-	#var_dump($_POST);
+	?>
+	<input id='backstretch_url' name='backstretch_options[backstretch_url]' type='text' value='<?php echo $options['backstretch_url']; ?>' />
+	<input class="button" name="uploadbutton" id="backstretch_media" value="Upload" />
+	<?php
 }
 
 function backstretch_section_text() {
