@@ -2,7 +2,7 @@
 /*
 Plugin Name: wp-backstretch
 Plugin URI: https://github.com/benjick/wp-backstretch
-Description: Adds the jQuery backstretch plugin to WP with a GUI
+Description: Adds the jQuery backstretch plugin to WP
 Version: 1.0
 Author: benjick
 Author URI: http://maxmalm.se
@@ -10,6 +10,9 @@ License: GPL2
 
 jQuery Backstretch is made by Scott Robbin
 http://srobbin.com/blog/jquery-plugins/jquery-backstretch/
+
+Download the jQuery plugin from https://github.com/srobbin/jquery-backstretch/zipball/master
+and drop it in the wp-backstretch folder
 */
 
 /*******************************
@@ -29,6 +32,9 @@ $url = $options['backstretch_url'];
 ?>
 <div class="wrap">
 <div id="icon-options-general" class="icon32"><br /></div><h2><?php _e('jQuery Backstretch','wp-backstretch'); ?></h2>
+<?php if($_GET['settings-updated'] == "true") { ?>
+<div id="message" class="updated"><p><?php _e('Settings saved.','wp-backstretch'); ?></p></div>
+<?php } ?>
 
 <form action="options.php" method="post">
 <?php settings_fields('backstretch_options'); ?>
